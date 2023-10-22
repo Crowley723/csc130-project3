@@ -1,6 +1,6 @@
 
 
-<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="/design.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <div class="topnav" id="myTopnav">
     <a href="/"<?php if($_SERVER['REQUEST_URI'] == "/index.php" or $_SERVER['REQUEST_URI'] == "/"){echo " class=\"active\"";} ?>>Welcome</a>
