@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <?php include "./header.php" ?>
     <link rel="stylesheet" href="/design.css">
+    <?php include "./header.php" ?>
+    
 </head>
 <body>
-    <header class="welcomehead">
+    <header class="welcome-head">
         <h1>Welcome to the Store!</h1>
         <p>Your one-stop shop for a couple things!</p>
     </header>

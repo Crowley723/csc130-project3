@@ -12,19 +12,19 @@ header {
 
 }
 
-.welcomehead {
-    /*
+.welcome-head {
+    
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    */
+    /*
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-height: 80vh;
+    min-height: 80vh;*/
 }
 
 .topnav {

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php include "./header.php" ?>
         <link rel="stylesheet" href="/design.css">
+        <?php include "./header.php" ?>
+        
         <title>Login</title>
     </head>
     <script>
