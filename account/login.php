@@ -36,8 +36,9 @@
     });
 </script>
     <body>
-    <h1>Login Page</h1>
+    
     <div class="login-box">
+        <h1>Login Page</h1>
         <form id="login-form">
             <div>
                 <label for="uid">Username:</label>
