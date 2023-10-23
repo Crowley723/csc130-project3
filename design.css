@@ -167,10 +167,17 @@ header {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    height: 100vh;
 }
 
 .login-form {
     margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
 }
 
 .login-form input,
