@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 0px;
 }
 
 header {
@@ -28,7 +29,7 @@ header {
     background-color: #333;
 }
 
-.topnav a {
+.topnav a, button {
     float: left;
     display: block;
     color: #f2f2f2;
@@ -37,6 +38,7 @@ header {
     text-decoration: none;
     font-size: 17px;
 }
+
 
 .active {
     background-color: #3caf83;
@@ -105,10 +107,11 @@ header {
     display: block;
 }
 
-.topnav a.split {
+.topnav a.split, button.split {
     float: right;
-    background-color: #3caf83;
+    background-color: #555;
     color: white;
+    margin: 0px;
 }
 
 @media screen and (max-width: 600px) {
