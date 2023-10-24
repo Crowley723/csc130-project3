@@ -1,8 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
 }
 
 header {
@@ -161,7 +158,7 @@ header {
     text-indent: 20px
 }
 
-.login input[type=text], input[type=password] {
+input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -169,7 +166,7 @@ header {
     border: 1px solid #ccc;
     box-sizing:border-box;
 }
-.login button{
+button{
     background-color: #3caf83;
     color: white;
     padding: 14px 20px;
@@ -178,31 +175,31 @@ header {
     cursor: pointer;
     width: 100%;
 }
-.login button:hover{
+button:hover{
     opacity: 0.8;
 }
-.login .cancelbtn{
+.cancelbtn{
     width: auto;
     padding:10px 18px;
     background-color: #f44336;
 }
-.login .imgcontainer {
+.imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
 }
-.login .imgcontainer img.avatar{
+.imgcontainer img.avatar{
     width: 40%;
     border-radius: 50%;
 }
-.login .container {
+.container {
     padding: 16px;
 }
-.login .span.psw{
+.span.psw{
     float: right;
     padding-top: 16px;
 }
-.login .modal{
+.modal{
     display: none; /*default to hidden*/
     position: fixed;
     z-index: 1;
@@ -215,13 +212,13 @@ header {
     background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
 }
-.login .modal-content{
+.modal-content{
     background-color: #fefefe;
     margin: 5% auto 15% auto;
     border: 1px solid #888;
     width: 80%;
 }
-.login .close {
+.close {
     position: absolute;
     right: 25px;
     top: 0;
@@ -229,11 +226,11 @@ header {
     font-size: 35px;
     font-weight: bolt;
 }
-.login .close:hover, .close:focus{
+.close:hover, .close:focus{
     color: red;
     cursor: pointer;
 }
-.login .animate{
+.animate{
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6;
 }

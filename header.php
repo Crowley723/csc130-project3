@@ -18,7 +18,7 @@
       }
     </script>
   </div>
-<div class="login">
+
   <div id="id01" class="modal">
     <form class="modal-content animate" action="/action_page.php" method="post">
       <div class="imgcontainer">
@@ -51,5 +51,3 @@
     }
   }
   </script>
-</div>
-
