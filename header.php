@@ -18,7 +18,7 @@
   </div>
 
   <div id="id01" class="modal">
-    <form class="modal-content animate" action="/action_page.php" method="post">
+    <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
       <div class="imgcontainer">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         <img src="/assets/login_silhouette.png" alt="Avatar" class="avatar">
@@ -55,3 +55,33 @@
     button.style.backgroundColor = "#555"
   }
   </script>
+
+<?php
+$dbservername = getenv('SQLHOSTNAME');
+$dbname = getenv('USERSDB');
+$dbusername = getenv('AUTHUSER');
+$dbpassword = getenv('AUTHPASS');
+
+$password = $username = $rememberMe = "";
+$bcryptOptions = [
+  'cost' => 12,
+];
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+  $username = testInput($_POST['username']);
+  $password = testInput($_POST['password']);
+  $rememberMe = testInput($_POST['remember']);
+}
+
+
+
+
+function testInput($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+?>
