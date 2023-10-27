@@ -1,9 +1,20 @@
 <link rel="stylesheet" href="/design.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <div class="topnav" id="myTopnav">
     <a href="/"<?php if($_SERVER['REQUEST_URI'] == "/index.php" or $_SERVER['REQUEST_URI'] == "/"){echo " class=\"active\"";} ?>>Welcome</a>
     <a href="/shop.php"<?php if($_SERVER['REQUEST_URI'] == "/shop.php" or $_SERVER['REQUEST_URI'] == "/shop.php"){echo " class=\"active\"";} ?>>Shop</a>
-    <button id="modalNavButton" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="split">Login</a>
+    <?php
+      session_start();
+      if(isset($_SESSION['username'])){//if currently logged in, show a "Logout" button
+        echo '<form action="logout.php" method="post">';
+        echo '<button id="modalNavButton" type="submit">Logout</button>';
+        echo '</form>';
+      } else{ //show Login button
+        echo '<button id="modalNavButton" onclick="document.getElementById(\'id01\').style.display=\'block\'" style="width:auto;" class="split">Login</a>';
+      }
+    
+    ?>
     <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="showHamburgerMenu()">&#9776;</a>
     <script>
       function showHamburgerMenu() {
@@ -43,13 +54,13 @@
   </div>
   <script>
   var modal = document.getElementById('id01');
-  window.onclick = function(event) {
+  window.onclick = function(event) { //allow clicks outside the login modal to exit the modal
     if (event.target == modal){
       modal.style.display = "none";
     }
   }
   var button = document.getElementById("modalNavButton");
-  if(modal.style.display == "none"){
+  if(modal.style.display == "none"){ //sets active color to login button :)
     button.style.backgroundColor = "#3caf83"
   } else{
     button.style.backgroundColor = "#555"
@@ -58,15 +69,20 @@
 
 <?php
 $dbservername = getenv('SQLHOSTNAME');
-$dbname = getenv('USERSDB');
-$dbusername = getenv('AUTHUSER');
-$dbpassword = getenv('AUTHPASS');
+$dbname = getenv('USERDBNAME');
+$dbusername = getenv('USERDBUSER');
+$dbpassword = getenv('USERDBPASS');
 
 $password = $username = $rememberMe = "";
 $bcryptOptions = [
   'cost' => 12,
 ];
 
+
+if(isset($_SESSION['username'])){
+  echo "Welcome, " . $$_SESSION['username']."!<br>";
+  echo "";
+}
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $username = testInput($_POST['username']);
