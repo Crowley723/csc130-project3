@@ -72,13 +72,10 @@
   </script>
 
 <?php
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
-$debugFlag = getenv('DEBUG');
-if($debugFlag == TRUE){
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
-}
 
 session_start();
 
@@ -125,6 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
   }
+  $findUserQuery->close();
 }
 
 
@@ -135,6 +133,6 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
-$findUserQuery->close();
+
 ?>
 
