@@ -30,6 +30,8 @@
 
   <div id="id01" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+
+    
       <div class="imgcontainer">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         <img src="/assets/login_silhouette.png" alt="Avatar" class="avatar">
@@ -68,36 +70,61 @@
   </script>
 
 <?php
-$dbservername = getenv('SQLHOSTNAME');
+
+$debugFlag = getenv('DEBUG');
+if($debugFlag == TRUE){
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+}
+
+session_start();
+
+$servername = getenv('SQLHOSTNAME');
 $dbname = getenv('USERDBNAME');
 $dbusername = getenv('USERDBUSER');
 $dbpassword = getenv('USERDBPASS');
-
-$password = $username = $rememberMe = "";
 $bcryptOptions = [
   'cost' => 12,
 ];
 
+$username = $password = $rememberme = "";
 
-if(isset($_SESSION['username'])){
-  echo "Welcome, " . $$_SESSION['username']."!<br>";
-  echo "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $username = test_input($_POST['username']);
+  $password = test_input($_POST['password']);
+  $rememberme = test_input($_POST['remember']);
+
+  $databaseConnection = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+        if ($databaseConnection->connect_error) {
+            die("Connection failed: " . $databaseConnection->connect_error);
+        } 
+
+  $findUsernameQuery = "Select `ID`, `Username`, `HashedPassword` FROM Users WHERE `Username` = . $username . LIMIT 1";
+  if($queryResult = $databaseConnection->query($findUsernameQuery) && mysql_num_rows($queryResult) > 0){
+    while($row = $queryResult->fetch_assoc()){
+      $row_id = $row['ID'];
+      $row_username = $row['Username'];
+      $row_hashedPassword = $row['HashedPassword']
+    }
+    if(password_verify($password, $row_hashedPassword)){
+      $_SESSION['logged-in'] = true;
+      $_SESSION['username'] = $row_username;
+      $_SESSION['login-expire'] = time() + () 28800;//
+      $_SESSION['remember-me'] = $rememberme;
+    }
+    
+  } else{
+    
+  }
+
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-  $username = testInput($_POST['username']);
-  $password = testInput($_POST['password']);
-  $rememberMe = testInput($_POST['remember']);
-}
-
-
-
-
-function testInput($data) {
+function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
 }
-
 ?>
+
