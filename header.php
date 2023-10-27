@@ -37,6 +37,7 @@
         <img src="/assets/login_silhouette.png" alt="Avatar" class="avatar">
       </div>
       <div class="container">
+        <div id="error-message" style="color:red;"></div>
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required>
 
@@ -67,6 +68,7 @@
   } else{
     button.style.backgroundColor = "#555"
   }
+  document.getElementById('error-message').innerHTML = '<?php echo addslashes($error); ?>';
   </script>
 
 <?php
@@ -84,9 +86,7 @@ $servername = getenv('SQLHOSTNAME');
 $dbname = getenv('USERDBNAME');
 $dbusername = getenv('USERDBUSER');
 $dbpassword = getenv('USERDBPASS');
-$bcryptOptions = [
-  'cost' => 12,
-];
+
 
 $username = $password = $rememberme = "";
 
@@ -100,33 +100,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die("Connection failed: " . $databaseConnection->connect_error);
   } 
 
-  $findUsernameQuery = "Select `ID`, `Username`, `HashedPassword` FROM Users WHERE `Username` = . $username . LIMIT 1";
+  $findUserQuery = $mysqli->prepare("Select `ID`, `Username`, `HashedPassword` FROM users WHERE `Username` = ?");
+  $findUserQuery->bind_param("s", $username);
+  
+  if($findUserQuery->execute()) {
+    $findUserQuery->store_result();
+    if($findUserQuery->num_rows > 0) {
+      $findUserQuery->bind_result($row_id, $row_username, $row_hashedPassword);
+      $findUserQuery->fetch();
 
-  if(($queryResult = $databaseConnection->query($findUsernameQuery)) && ($queryResult->num_rows > 0)){
-    while($row = $queryResult->fetch_assoc()){
-      $row_id = $row['ID'];
-      $row_username = $row['Username'];
-      $row_hashedPassword = $row['HashedPassword'];
+      if(password_verify($password, $row_hashedPassword)) {
+        $_SESSION['logged-in'] = true;
+        $_SESSION['username'] = $row_username;
+        $_SESSION['login-expire'] = time() + 28800;//8 hours in seconds (unix time)
+        $_SESSION['remember-me'] = $rememberme;
+      } else{
+        //passwords don't match
+        $error = "Invalid username or password.";
+      }
     }
-    if(password_verify($password, $row_hashedPassword)){
-      $_SESSION['logged-in'] = true;
-      $_SESSION['username'] = $row_username;
-      $_SESSION['login-expire'] = time() + 28800;//8 hours in seconds (unix time)
-      $_SESSION['remember-me'] = $rememberme;
-    }
-    
-  } else{
-    
-    
+  } else {
+    //username not found
+    $error = "Invalid username or password.";
+
+
   }
-
 }
 
+
+  
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
 }
+$findUserQuery->close();
 ?>
 
