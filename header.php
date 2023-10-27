@@ -96,25 +96,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $rememberme = test_input($_POST['remember']);
 
   $databaseConnection = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-        if ($databaseConnection->connect_error) {
-            die("Connection failed: " . $databaseConnection->connect_error);
-        } 
+  if ($databaseConnection->connect_error) {
+    die("Connection failed: " . $databaseConnection->connect_error);
+  } 
 
   $findUsernameQuery = "Select `ID`, `Username`, `HashedPassword` FROM Users WHERE `Username` = . $username . LIMIT 1";
-  if($queryResult = $databaseConnection->query($findUsernameQuery) && mysql_num_rows($queryResult) > 0){
+
+  if(($queryResult = $databaseConnection->query($findUsernameQuery)) && ($queryResult->num_rows > 0)){
     while($row = $queryResult->fetch_assoc()){
       $row_id = $row['ID'];
       $row_username = $row['Username'];
-      $row_hashedPassword = $row['HashedPassword']
+      $row_hashedPassword = $row['HashedPassword'];
     }
     if(password_verify($password, $row_hashedPassword)){
       $_SESSION['logged-in'] = true;
       $_SESSION['username'] = $row_username;
-      $_SESSION['login-expire'] = time() + () 28800;//
+      $_SESSION['login-expire'] = time() + 28800;//8 hours in seconds (unix time)
       $_SESSION['remember-me'] = $rememberme;
     }
     
   } else{
+    
     
   }
 
