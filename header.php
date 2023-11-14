@@ -1,6 +1,7 @@
 <head>
 <link rel="stylesheet" href="/design.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <div class="topnav" id="myTopnav">
     <a href="/"<?php if($_SERVER['REQUEST_URI'] == "/index.php" or $_SERVER['REQUEST_URI'] == "/"){echo " class=\"active\"";} ?>>Welcome</a>
