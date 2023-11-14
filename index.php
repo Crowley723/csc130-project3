@@ -9,11 +9,12 @@
     
 </head>
 <body>
-    <header class="welcome-head">
-        <h1>Welcome to the Store!</h1>
-        <p>Your one-stop shop for a couple things!</p>
-    </header>
-        
+    <div class="body-text">
+        <header class="welcome-head">
+            <h1>Welcome to the Store!</h1>
+            <p>Your one-stop shop for a couple things!</p>
+        </header>
+    </div>
     <footer>
         <p>&copy; 2023. Its possible this is the footer.</p>
     </footer>

@@ -1,256 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0px;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-header {
-    color: #000000;
-    padding: 20px;
-
-}
-
-.welcome-head {
-    
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.body-text {
+    margin: 16px;
 }
 
 .topnav {
-    overflow: hidden;
-    background-color: #333;
+  overflow: hidden;
+  background-color: #333;
 }
 
-.topnav a, button {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+.topnav a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-
-.active {
-    background-color: #3caf83;
-    color: white;
+.topnav a:hover {
+  background-color: #555;
+  color: white;
 }
 
+.topnav a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #333;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+  background: #555;
+}
 .topnav .icon {
     display: none;
 }
 
-.dropdown {
-    float: left;
-    overflow: hidden;
+.welcome-head{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
 }
-
-.dropdown .dropbtn {
-    font-size: 17px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
+.welcome-head h1{
+  margin: 16px 0 8px;
 }
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -1px;
-}
-
-.topnav a:hover, .dropdown:hover .dropbtn {
-    background-color: #555;
-    color: white;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.topnav a.split, button.split {
-    float: right;
-    background-color: #555;
-    color: white;
-    margin: 0px;
-}
-
-@media screen and (max-width: 600px) {
-    .topnav a:not(:first-child), .dropdown .dropbtn {
-        display: none;
-    }
-
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .topnav.responsive {
-        position: relative;
-    }
-
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-
-    .topnav.responsive .dropdown {
-        float: none;
-    }
-
-    .topnav.responsive .dropdown-content {
-        position: relative;
-    }
-
-    .topnav.responsive .dropdown .dropbtn {
-        display: block;
-        width: 100%;
-        text-align: left;
-    }
-}
-
-.button-indent {
-    text-indent: 20px
-}
-
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing:border-box;
-}
-button{
-    background-color: #3caf83;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    font-size: 17px
-}
-button:hover{
-    opacity: 0.8;
-}
-.cancelbtn{
-    width: auto;
-    padding:10px 18px;
-    background-color: #f44336;
-}
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-.imgcontainer img.avatar{
-    width: 40%;
-    border-radius: 50%;
-}
-.container {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-}
-span.psw{
-    float: right;
-    padding-top: 16px;
-}
-.modal{
-    display: none; /*default to hidden*/
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /*enable scroll if needed*/
-    background-color: rgba(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-}
-.modal-content{
-    background-color: #fefefe;
-    margin: 5% auto 15% auto;
-    border: 1px solid #888;
-    width: 25%;
-}
-.close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bolt;
-}
-.close:hover, .close:focus{
-    color: red;
-    cursor: pointer;
-}
-.animate{
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6;
-}
-@-webkit-keyframes animatezoom{
-    from{-webkit-transform: scale(0)}
-    to{-webkit-transform: scale(1);}
-}
-@keyframes animatezoom{
-    from{transform: scale(0)}
-    to{transform: scale(1)}
-}
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float:none;
-    }
-    .cancelbtn {
-        width:100%;
-    }
+.welcome-head p{
+  margin: 8px 8px 8px;
 }
 
 .products {
@@ -261,7 +86,7 @@ span.psw{
 }
 
 .product {
-    background-color: #fff;
+    background-color: #333;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -275,6 +100,29 @@ span.psw{
 
 .product button:hover {
     background-color: #555;
+}
+.shop-header{
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+    /*border-bottom: 1px solid black;*/
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Use 1fr to fill available width */
+  gap: 16px; /* Adjust the gap between items as needed */
+  padding: 16px;
+}
+
+.grid-item {
+  flex: 1; /* Flex property to fill available width */
+  background-color: #fff; /* Set the background color as needed */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adjust shadow values as needed */
+  margin: 8px; /* Adjust margin as needed */
+  display: flex; /* Enable flexbox */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
 }
 
 footer {
