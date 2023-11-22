@@ -38,6 +38,26 @@ document.querySelector('input[name="search"]').addEventListener('input', functio
         }
     });
 
+var debounceTimer;
+
+document.querySelector('input[name="search"]').addEventListener('input', function () {
+    clearTimeout(debounceTimer); // Clear the previous timer
+
+    debounceTimer = setTimeout(function () {
+        // Your code to handle the search request
+        var searchTerm = document.querySelector('input[name="search"]').value.toLowerCase();
+        // Perform the search or update the page as needed
+        getSearchResults(searchTerm);
+    }, 300); // Adjust the delay (in milliseconds) as needed
+});
+
+function getSearchResults(searchTerm) {
+    // You can make your AJAX request or perform other actions here
+    // For example, update the page or send a request to the server
+    console.log('Search term:', searchTerm);
+}
+
+
     // Display a message if there are no matches
     var noMatchMessage = document.getElementById('no-match-message');
     if (!hasMatches) {
