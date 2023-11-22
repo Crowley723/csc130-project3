@@ -16,7 +16,11 @@ session_start();
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     ob_start();
     
-    $searchTerm = $_POST['searchTerm'];
+    $searchTerm = trim($_POST['searchTerm']);
+    if(empty($searchTerm)){
+        http_response_code(200);
+        exit();
+    }
     
 
     

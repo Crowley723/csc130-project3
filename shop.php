@@ -56,7 +56,7 @@ function logSearchResults(searchTerm) {
     data:{searchTerm: searchTerm 
     },
     success: function (data) {
-        console.log(data);
+        console.log("Search: " + searchTerm);
     },
     error: function (xhr, status, error) {
         console.error('Error:', status, error);
