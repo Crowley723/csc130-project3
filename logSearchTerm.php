@@ -45,6 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }        
     }catch(Exception $e){
+        http_response_code(500);
         echo "Internal Server Error: " . $e->getMessage();
         ob_flush();
         exit();
