@@ -133,7 +133,9 @@ body {
 }
 
 .item-image {
-  width: 150px;
+  max-width: 150px;
+  max-height: 150px;
+  
   display: flex;
   float: left;
   flex: 1;
