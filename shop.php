@@ -11,6 +11,42 @@
 jQuery(document).ready(function(){
     getPosts();
 });
+// Add an event listener to the search input
+document.querySelector('input[name="search"]').addEventListener('input', function () {
+    // Get the current search term from the input field
+    var searchTerm = this.value.toLowerCase();
+
+    // Get all grid items
+    var gridItems = document.querySelectorAll('.grid-item');
+
+    // Flag to check if any items match the search term
+    var hasMatches = false;
+
+    // Loop through each grid item and check if it contains the search term
+    gridItems.forEach(function (gridItem) {
+        var itemName = gridItem.querySelector('.item-name').innerText.toLowerCase();
+        var itemDescription = gridItem.querySelector('.item-description').innerText.toLowerCase();
+
+        // Check if the item name or description contains the search term
+        if (itemName.includes(searchTerm) || itemDescription.includes(searchTerm)) {
+            // Show the grid item if it matches the search term
+            gridItem.style.display = 'flex'; // Assuming your grid items are styled with flex
+            hasMatches = true;
+        } else {
+            // Hide the grid item if it doesn't match the search term
+            gridItem.style.display = 'none';
+        }
+    });
+
+    // Display a message if there are no matches
+    var noMatchMessage = document.getElementById('no-match-message');
+    if (!hasMatches) {
+        noMatchMessage.style.display = 'block';
+    } else {
+        noMatchMessage.style.display = 'none';
+    }
+});
+
 
 function getPosts(){
     $.ajax({
@@ -85,7 +121,10 @@ function updatePage(data){
     <div class="shop-header">
         <h1>The Shoppe!<h1>
     </div>
+    
+
     <div class="grid-container" id="grid-container">
+    <div id="no-match-message" style="display: none;">No items match the search term.</div>
         
     </div>
     </body>
