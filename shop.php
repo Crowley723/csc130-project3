@@ -12,51 +12,32 @@ jQuery(document).ready(function(){
     getPosts();
 });
 // Add an event listener to the search input
+var debounceTimer;
 document.querySelector('input[name="search"]').addEventListener('input', function () {
     // Get the current search term from the input field
     var searchTerm = this.value.toLowerCase();
+    clearTimeout(debounceTimer);
+    
+    debounceTimer = setTimeout(function() {
+        var searchTerm = document.querySelector('input[name="search"]').value.toLowerCase();
 
-    // Get all grid items
+        logSearchResults(searchTerm);
+    }, 1000);
+
     var gridItems = document.querySelectorAll('.grid-item');
-
-    // Flag to check if any items match the search term
     var hasMatches = false;
 
-    // Loop through each grid item and check if it contains the search term
     gridItems.forEach(function (gridItem) {
         var itemName = gridItem.querySelector('.item-name').innerText.toLowerCase();
         var itemDescription = gridItem.querySelector('.item-description').innerText.toLowerCase();
 
-        // Check if the item name or description contains the search term
         if (itemName.includes(searchTerm) || itemDescription.includes(searchTerm)) {
-            // Show the grid item if it matches the search term
-            gridItem.style.display = 'flex'; // Assuming your grid items are styled with flex
+            gridItem.style.display = 'flex';
             hasMatches = true;
         } else {
-            // Hide the grid item if it doesn't match the search term
             gridItem.style.display = 'none';
         }
     });
-
-var debounceTimer;
-
-document.querySelector('input[name="search"]').addEventListener('input', function () {
-    clearTimeout(debounceTimer); // Clear the previous timer
-
-    debounceTimer = setTimeout(function () {
-        // Your code to handle the search request
-        var searchTerm = document.querySelector('input[name="search"]').value.toLowerCase();
-        // Perform the search or update the page as needed
-        getSearchResults(searchTerm);
-    }, 300); // Adjust the delay (in milliseconds) as needed
-});
-
-function getSearchResults(searchTerm) {
-    // You can make your AJAX request or perform other actions here
-    // For example, update the page or send a request to the server
-    console.log('Search term:', searchTerm);
-}
-
 
     // Display a message if there are no matches
     var noMatchMessage = document.getElementById('no-match-message');
@@ -66,6 +47,23 @@ function getSearchResults(searchTerm) {
         noMatchMessage.style.display = 'none';
     }
 });
+
+function logSearchResults(searchTerm) {
+    $.ajax({
+    url: '/logSearchTerm.php',
+    method: 'POST',
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    data:{searchTerm: searchTerm 
+    },
+    success: function (data) {
+        console.log(data);
+    },
+    error: function (xhr, status, error) {
+        console.error('Error:', status, error);
+    }
+});
+
+}
 
 
 function getPosts(){
@@ -86,14 +84,6 @@ function updatePage(data){
     if(data && data.length > 0){  // Check if data is not null and has items
         for(var i = data.length - 1; i >= 0; i--){
             var item = data[i];
-        // <div class="grid-item">
-        //     <img class="item-image" src="/assets/cat-food.png" alt="Cat Food">
-        //     <div class="text-container">
-        //         <div class="item-name">Cat Food</div>
-        //         <div class="item-quantity">Quantity on Hand: 7</div>
-        //         <div class="item-description">The food that you give your cat. Duh</div>
-        //     </div>
-        // </div>
             if(item.hasOwnProperty('ID') && 
                 item.hasOwnProperty('Name') && 
                 item.hasOwnProperty('Description') && 
