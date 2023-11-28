@@ -11,6 +11,60 @@
 jQuery(document).ready(function(){
     getPosts();
 });
+// Add an event listener to the search input
+var debounceTimer;
+document.querySelector('input[name="search"]').addEventListener('input', function () {
+    // Get the current search term from the input field
+    var searchTerm = this.value.toLowerCase();
+    clearTimeout(debounceTimer);
+    
+    debounceTimer = setTimeout(function() {
+        var searchTerm = document.querySelector('input[name="search"]').value.toLowerCase();
+
+        logSearchResults(searchTerm);
+    }, 1000);
+
+    var gridItems = document.querySelectorAll('.grid-item');
+    var hasMatches = false;
+
+    gridItems.forEach(function (gridItem) {
+        var itemName = gridItem.querySelector('.item-name').innerText.toLowerCase();
+        var itemDescription = gridItem.querySelector('.item-description').innerText.toLowerCase();
+
+        if (itemName.includes(searchTerm) || itemDescription.includes(searchTerm)) {
+            gridItem.style.display = 'flex';
+            hasMatches = true;
+        } else {
+            gridItem.style.display = 'none';
+        }
+    });
+
+    // Display a message if there are no matches
+    var noMatchMessage = document.getElementById('no-match-message');
+    if (!hasMatches) {
+        noMatchMessage.style.display = 'block';
+    } else {
+        noMatchMessage.style.display = 'none';
+    }
+});
+
+function logSearchResults(searchTerm) {
+    $.ajax({
+    url: '/logSearchTerm.php',
+    method: 'POST',
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    data:{searchTerm: searchTerm 
+    },
+    success: function (data) {
+        console.log("Search: " + searchTerm);
+    },
+    error: function (xhr, status, error) {
+        console.error('Error:', status, error);
+    }
+});
+
+}
+
 
 function getPosts(){
     $.ajax({
@@ -30,14 +84,6 @@ function updatePage(data){
     if(data && data.length > 0){  // Check if data is not null and has items
         for(var i = data.length - 1; i >= 0; i--){
             var item = data[i];
-        // <div class="grid-item">
-        //     <img class="item-image" src="/assets/cat-food.png" alt="Cat Food">
-        //     <div class="text-container">
-        //         <div class="item-name">Cat Food</div>
-        //         <div class="item-quantity">Quantity on Hand: 7</div>
-        //         <div class="item-description">The food that you give your cat. Duh</div>
-        //     </div>
-        // </div>
             if(item.hasOwnProperty('ID') && 
                 item.hasOwnProperty('Name') && 
                 item.hasOwnProperty('Description') && 
@@ -85,7 +131,10 @@ function updatePage(data){
     <div class="shop-header">
         <h1>The Shoppe!<h1>
     </div>
+    
+
     <div class="grid-container" id="grid-container">
+    <div id="no-match-message" style="display: none;">No items match the search term.</div>
         
     </div>
     </body>
