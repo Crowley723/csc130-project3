@@ -24,7 +24,7 @@
             <h1>Welcome to the Store!</h1>
             <p>For the group project, search for stuff that may or may not be in a pet store.</p>
             <a class="get-started" href="/shop.php">Click Here to Get Started</a>
-            <?php echo "<p>Hello World!</p>";?>
+            
         </header>
     </div>
     <footer>
