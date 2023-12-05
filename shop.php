@@ -145,7 +145,6 @@ function updatePage(data){
     <div class="shop-header">
         <h1>The Shoppe!<h1>
     </div>
-    <div id="arrow">&#8599;</div>
     
 
     <div class="grid-container" id="grid-container">
