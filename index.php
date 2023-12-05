@@ -8,14 +8,22 @@
     <?php include "./header.php" ?>
     
 </head>
+<style>
+
+
+</style>
+
 <body>
     <div class="body-text">
         <header class="welcome-head">
             <h1>Welcome to the Store!</h1>
-            <p>Your one-stop shop for a couple things!</p>
+            <p>For the group project, search for stuff that may or may not be in a pet store.</p>
+            <a href="/shop.php">Click Here to Get Started</a>
+            <?php echo "<p>Hello World!</p>";?>
         </header>
     </div>
     <footer>
+        
         <p>&copy; 2023. Its possible this is the footer.</p>
     </footer>
 </body>
