@@ -10,6 +10,19 @@
         
 jQuery(document).ready(function(){
     getPosts();
+    const arrow = document.getElementById("arrow");
+
+        // Show the arrow initially
+        arrow.style.display = "block";
+
+        // Set a timeout to hide the arrow after 5 seconds
+        setTimeout(function () {
+            arrow.style.opacity = 0;
+            // You can add other hiding animations here
+        }, 5000);
+        arrow.addEventListener("click", function () {
+            arrow.style.display = "none";
+        });
 });
 // Add an event listener to the search input
 var debounceTimer;
@@ -126,11 +139,13 @@ function updatePage(data){
 }
 
     </script>
+
     </head>
     <body>
     <div class="shop-header">
         <h1>The Shoppe!<h1>
     </div>
+    <div id="arrow">&#8599;</div>
     
 
     <div class="grid-container" id="grid-container">
